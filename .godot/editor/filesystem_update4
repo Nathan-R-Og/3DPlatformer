@@ -1,0 +1,6 @@
+res://default_env.tres
+res://assets/scenes/world1/Spatial.tscn
+res://assets/scenes/dungeon/tile/TILESET.tres
+res://assets/scenes/instances/player/Player.tscn
+res://assets/scenes/dungeon/dungeon.tscn
+res://assets/scenes/dungeon/tile/block.tscn
