@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/scenes/instances/player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dso7k3td1xkh1" path="res://icon.png" id="2_r8x2x"]
-[ext_resource type="Script" path="res://assets/scripts/Target.gd" id="3_tl4nq"]
+[ext_resource type="Script" path="res://assets/scenes/instances/player/Target.gd" id="3_8qhwf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wim0p"]
 
@@ -58,7 +58,7 @@ target_position = Vector3(0, 0, 0)
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("3_tl4nq")
+script = ExtResource("3_8qhwf")
 minLookAngle = -60.0
 
 [node name="Camera" type="Camera3D" parent="Target"]

@@ -54,7 +54,7 @@ func _process(delta):
 	
 	
 	if looky:
-		mouseDelta += Vector2(Input.get_axis("move2_left", "move2_right"), Input.get_axis("move2_up", "move2_down")) * 15
+		mouseDelta += Input.get_vector("move2_left", "move2_right", "move2_up", "move2_down") * 15
 	transform.origin = $"../PlayerBody".transform.origin + Vector3(0, 2, 0)
 	#set the rotation vecotr to the mouse speed y and x, but also mutliply by time and look sensitivuity
 	var rot = Vector3(-mouseDelta.y, mouseDelta.x, 0) * lookSensitivity * delta
