@@ -1,4 +1,0 @@
-res://default_env.tres
-res://assets/scenes/instances/player/Player.tscn
-res://assets/scenes/dungeon/tile/TILESET.tres
-res://assets/scenes/instances/player/Target.gd

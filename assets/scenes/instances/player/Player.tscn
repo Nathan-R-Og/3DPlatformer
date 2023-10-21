@@ -1,72 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://5s4wwuavva48"]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource type="Script" path="res://assets/scenes/instances/player/Player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dso7k3td1xkh1" path="res://icon.png" id="2_r8x2x"]
-[ext_resource type="Script" path="res://assets/scenes/instances/player/Target.gd" id="3_8qhwf"]
+[ext_resource path="res://assets/scenes/instances/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://ico2n.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wim0p"]
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 1.11846, 0.90362, 0.990104 )
 
-[sub_resource type="BoxShape3D" id="24"]
-size = Vector3(1.11846, 0.90362, 0.990104)
+[sub_resource type="CapsuleShape" id=25]
+radius = 0.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_twtaw"]
-radius = 1.0
+[node name="Player" type="Spatial"]
+script = ExtResource( 1 )
 
-[node name="Player" type="Node3D"]
-script = ExtResource("1")
+[node name="PlayerBody" type="KinematicBody" parent="."]
+transform = Transform( 0.0160683, 0, -0.999871, 0, 1, 0, 0.999871, 0, 0.0160683, 0, 0, 0 )
+__meta__ = {
+"__editor_plugin_screen__": "3D"
+}
 
-[node name="PlayerBody" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.0160683, 0, -0.999871, 0, 1, 0, 0.999871, 0, 0.0160683, 0, 0, 0)
-slide_on_ceiling = false
-wall_min_slide_angle = 0.0
-floor_constant_speed = true
-floor_max_angle = 1.22173
+[node name="PlayerInteractArea" type="Area" parent="PlayerBody"]
 
-[node name="CollisionCapsule" type="CollisionShape3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_wim0p")
+[node name="CollisionShape" type="CollisionShape" parent="PlayerBody/PlayerInteractArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00846484, 0.825119, 1.26858 )
+shape = SubResource( 24 )
 
-[node name="PlayerInteractArea" type="Area3D" parent="PlayerBody"]
+[node name="CollisionCapsule" type="CollisionShape" parent="PlayerBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
+shape = SubResource( 25 )
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody/PlayerInteractArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00846484, 0.825119, 1.26858)
-shape = SubResource("24")
+[node name="Forward" type="TouchScreenButton" parent="PlayerBody"]
+position = Vector2( 72, 301 )
+passby_press = true
+action = "move_forward"
+visibility_mode = 1
 
-[node name="IMG" type="Node3D" parent="PlayerBody"]
+[node name="Backward" type="TouchScreenButton" parent="PlayerBody"]
+position = Vector2( 72, 365 )
+passby_press = true
+action = "move_backwards"
+visibility_mode = 1
+
+[node name="Left" type="TouchScreenButton" parent="PlayerBody"]
+position = Vector2( 29, 332 )
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="PlayerBody"]
+position = Vector2( 108, 327 )
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="IMG" type="Spatial" parent="PlayerBody"]
 
 [node name="Sprite3D" type="Sprite3D" parent="PlayerBody/IMG"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952542, 0)
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952542, 0 )
 pixel_size = 0.03
 billboard = 2
-texture = ExtResource("2_r8x2x")
-
-[node name="Shadow" type="RayCast3D" parent="PlayerBody"]
-target_position = Vector3(0, -20, 0)
-
-[node name="Texture" type="Sprite3D" parent="PlayerBody/Shadow"]
-modulate = Color(0, 0, 0, 1)
-pixel_size = 0.02
-axis = 1
-shaded = true
-no_depth_test = true
-texture = ExtResource("2_r8x2x")
-
-[node name="WallJump" type="ShapeCast3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
-shape = SubResource("SphereShape3D_twtaw")
-target_position = Vector3(0, 0, 0)
-
-[node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("3_8qhwf")
-minLookAngle = -60.0
-
-[node name="Camera" type="Camera3D" parent="Target"]
-transform = Transform3D(1, 0, 0, 0, 0.961411, 0.275117, 0, -0.275117, 0.961411, 0, 0.757339, 0.848173)
-current = true
-far = 8192.0
-
-[node name="RayCast" type="RayCast3D" parent="Target"]
-target_position = Vector3(0, 1000, 0)
-collision_mask = 2
-debug_shape_thickness = 5
+texture = ExtResource( 2 )

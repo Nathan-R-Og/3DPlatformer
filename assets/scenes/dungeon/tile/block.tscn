@@ -1,43 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://bporoimpfyjh0"]
+[gd_scene load_steps=7 format=2]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7fo4"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="BoxMesh" id="1"]
-material = SubResource("StandardMaterial3D_y7fo4")
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4yxel"]
-points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lenai"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="PrismMesh" id="4"]
-material = SubResource("StandardMaterial3D_lenai")
+[sub_resource type="PrismMesh" id=4]
 left_to_right = 0.0
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wpk06"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.25098, 0, 1, 1 )
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, 1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[node name="block" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("1")
+[node name="Spatial" type="Spatial"]
+
+[node name="block" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
 
-[node name="StaticBody3D" type="StaticBody3D" parent="block"]
-collision_layer = 3
-collision_mask = 3
+[node name="StaticBody" type="StaticBody" parent="block"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="block/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_4yxel")
+[node name="CollisionShape" type="CollisionShape" parent="block/StaticBody"]
+shape = SubResource( 2 )
 
-[node name="ramp" type="MeshInstance3D" parent="."]
-mesh = SubResource("4")
+[node name="ramp" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 6 )
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="ramp"]
+[node name="StaticBody" type="StaticBody" parent="ramp"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ramp/StaticBody3D2"]
-shape = SubResource("ConcavePolygonShape3D_wpk06")
+[node name="CollisionShape" type="CollisionShape" parent="ramp/StaticBody"]
+shape = SubResource( 5 )
